@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PedidosServices {
@@ -36,5 +37,9 @@ public class PedidosServices {
         );
         Pedido pedido = pedidoRepository.save(new Pedido(pedidoRequest.clienteId(), list));
         return ResponseEntity.ok().body(new PedidoResponse(pedido));
+    }
+
+    public ResponseEntity<List<PedidoResponse>> getTodosOsPedido() {
+        return ResponseEntity.ok().body(pedidoRepository.findAll().stream().map(PedidoResponse::new).collect(Collectors.toList()));
     }
 }
