@@ -1,17 +1,16 @@
 package br.com.fiap.gestaopedidos.services;
 
 import br.com.fiap.gestaopedidos.client.ServiceProdutosClient;
+import br.com.fiap.gestaopedidos.dto.PedidoRequest;
 import br.com.fiap.gestaopedidos.dto.PedidoResponse;
 import br.com.fiap.gestaopedidos.model.Itens;
 import br.com.fiap.gestaopedidos.model.Pedido;
-import br.com.fiap.gestaopedidos.dto.PedidoRequest;
 import br.com.fiap.gestaopedidos.repository.PedidoRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PedidosServices {
@@ -30,7 +29,7 @@ public class PedidosServices {
     public ResponseEntity<PedidoResponse> salvarPedido(PedidoRequest pedidoRequest) {
         List<Itens> list = new ArrayList<>();
         pedidoRequest.itens().forEach(item -> {
-                    if(serviceProdutosClient.verificaDisponibilidadeEstoque(item.getProdutoId(), item.getQuantidade())){
+                    if(Boolean.TRUE.equals(serviceProdutosClient.verificaDisponibilidadeEstoque(item.getProdutoId(), item.getQuantidade()))){
                         list.add(item);
                     }
                 }
@@ -40,6 +39,6 @@ public class PedidosServices {
     }
 
     public ResponseEntity<List<PedidoResponse>> getTodosOsPedido() {
-        return ResponseEntity.ok().body(pedidoRepository.findAll().stream().map(PedidoResponse::new).collect(Collectors.toList()));
+        return ResponseEntity.ok().body(pedidoRepository.findAll().stream().map(PedidoResponse::new).toList());
     }
 }
