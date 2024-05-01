@@ -41,4 +41,8 @@ public class PedidosServices {
     public ResponseEntity<List<PedidoResponse>> getTodosOsPedido() {
         return ResponseEntity.ok().body(pedidoRepository.findAll().stream().map(PedidoResponse::new).toList());
     }
+
+    public ResponseEntity<PedidoResponse> getPedidoById(String id) {
+        return ResponseEntity.ok().body(new PedidoResponse(pedidoRepository.findById(id).orElseThrow()));
+    }
 }

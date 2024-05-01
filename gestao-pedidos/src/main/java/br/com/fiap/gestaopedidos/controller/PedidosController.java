@@ -28,4 +28,9 @@ public class PedidosController {
         return pedidosServices.getTodosOsPedido();
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<PedidoResponse> pedidoById(@PathVariable String id){
+        return pedidosServices.getPedidoById(id);
+    }
+
 }
