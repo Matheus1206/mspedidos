@@ -1,5 +1,6 @@
 package br.com.fiap.gestaopedidos.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 public class Pedido {
 
     @Id
+    @JsonProperty("pedido_id")
     private String id;
 
     private String idCliente;
