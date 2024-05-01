@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface ServiceProdutosClient {
 
     @PostMapping("/{id}/{quantidade}/estoque")
-    void verificaDisponibilidadeEstoque(@PathVariable("id") String id, @PathVariable("quantidade") Integer quantidade);
+    Boolean verificaDisponibilidadeEstoque(@PathVariable("id") String id, @PathVariable("quantidade") Integer quantidade);
 
 }

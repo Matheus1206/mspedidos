@@ -1,7 +1,9 @@
 package br.com.fiap.gestaopedidos.controller;
 
-import br.com.fiap.gestaopedidos.model.PedidoRequest;
+import br.com.fiap.gestaopedidos.dto.PedidoResponse;
+import br.com.fiap.gestaopedidos.dto.PedidoRequest;
 import br.com.fiap.gestaopedidos.services.PedidosServices;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +20,8 @@ public class PedidosController {
     }
 
     @PostMapping
-    public void criar(@RequestBody PedidoRequest pedidoRequest){
-        pedidosServices.salvarPedido(pedidoRequest);
+    public ResponseEntity<PedidoResponse> criar(@RequestBody PedidoRequest pedidoRequest){
+        return pedidosServices.salvarPedido(pedidoRequest);
     }
 
 }
